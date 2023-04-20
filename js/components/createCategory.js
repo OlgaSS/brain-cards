@@ -1,4 +1,5 @@
 import { createElement } from '../helper/createElement.js';
+import { declOfNum } from '../helper/declOfNum.js';
 
 export const createCategory = (parent) => {
     const category = createElement('section', {
@@ -27,7 +28,7 @@ export const createCategory = (parent) => {
         item.insertAdjacentHTML('afterbegin', `
         <button class="category__card">
             <span class="category__title">${data.title}</span>
-            <span class="category__pairs">${data.length} пар</span>
+            <span class="category__pairs">${declOfNum(data.length, ['пара', 'пары', 'пар'])}</span>
         </button>
         <button class="category__btn category__edit" aria-label="редактировать"></button>
         <button class="category__btn category__del" aria-label="удалить"></button>
