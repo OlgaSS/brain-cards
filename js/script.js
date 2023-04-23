@@ -21,7 +21,7 @@ const initApp = async () => {
         pairsObj.unmount();
     }
 
-    const postHandler = async () => { //функция сохранения новых слов в категории
+    const postHandler = async () => { //функция сохранения новой категории
         const data = editCategoryObj.parseData();
         const dataCategories = await fetchCreateCategory(data);
 
@@ -52,6 +52,8 @@ const initApp = async () => {
     }
 
 
+
+
     const renderIndex = async (event) => {
         event?.preventDefault();
         allSectionUnmount();
@@ -69,6 +71,7 @@ const initApp = async () => {
     renderIndex();
 
     headerObj.headerLogoLink.addEventListener('click', renderIndex);
+
     headerObj.headerButton.addEventListener('click', () => {
         allSectionUnmount();
         headerObj.updateHeaderTitle('Новая категория');
@@ -76,6 +79,11 @@ const initApp = async () => {
         editCategoryObj.btnSave.addEventListener('click', postHandler);
         editCategoryObj.btnSave.removeEventListener('click', patchHandler);
 
+        editCategoryObj.btnCancel.addEventListener('click', () => {
+            if (confirm('Вы уверены, что хотите выйти без сохранения?')) {
+                renderIndex();
+            }
+        })
     });
 
     categoryObj.categoryList.addEventListener('click', async (e) => {
@@ -88,6 +96,13 @@ const initApp = async () => {
             editCategoryObj.mount(dataCards);
             editCategoryObj.btnSave.addEventListener('click', patchHandler);
             editCategoryObj.btnSave.removeEventListener('click', postHandler);
+
+            editCategoryObj.btnCancel.addEventListener('click', () => {
+                if (confirm('Вы уверены, что хотите выйти без сохранения?')) {
+                    showAlert('Изменения не сохранились!');
+                    renderIndex();
+                }
+            })
 
             return
         }

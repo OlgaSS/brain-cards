@@ -38,7 +38,6 @@ export const createPairs = (parent) => {
     let dataCards = [];
 
     const flipCard = () => {
-        console.log(btnCard.index);
         btnCard.classList.add('card__item_flipped');
         btnCard.removeEventListener('click', flipCard);
         setTimeout(() => {
